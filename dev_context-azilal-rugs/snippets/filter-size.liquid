@@ -1,0 +1,129 @@
+{% include 'dump' with products %}
+
+  {% assign sizes = '' %}
+  {% for product in products limit: limit %}
+    {% assign sizeIndex = null %}
+    {% for option in product.options %}
+      {% if option == "Size" %}
+        {% assign sizeIndex = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        {% assign options = variant.options[sizeIndex] %}
+        {% if options == "Default Title" %}
+          {% assign options = '' %}
+        {% endif %}
+        {% assign sizes = sizes | append: options | append: '_' %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {% assign sizesArr = sizes | split: '_' | uniq %}
+  <label for="sort_by" class="small--hide">Size</label>
+  <span class="collection__button-arrow">
+    <select class="styled-select coll-filter collection__button">
+      <option value="">All</option>
+      {% for size in sizesArr %}
+        <option value="{{ size | handle }}"{% if current_tags contains size %} selected{% endif %}>{{ size }}</option>
+      {% endfor %}
+    </select>
+  </span>
+
+  <script>
+    Shopify.queryParams = {};
+    if (location.search.length) {
+      for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+        aKeyValue = aCouples[i].split('=');
+        if (aKeyValue.length > 1) {
+          Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+        }
+      }
+    }
+    jQuery('.coll-picker').change(function() {
+      if (jQuery(this).val()) {
+        location.href = '/collections/' + jQuery(this).val();
+      }
+      else {
+        location.href = '/collections/all';
+      }
+    });
+    var collFilters = jQuery('.coll-filter');
+    collFilters.change(function() {
+      delete Shopify.queryParams.page;
+      var newTags = [];
+      collFilters.each(function() {
+        if (jQuery(this).val()) {
+          newTags.push(jQuery(this).val());
+        }
+      });
+      {% if collection.handle %}
+      var newURL = '/collections/{{ collection.handle }}';
+      if (newTags.length) {
+        newURL += '/' + newTags.join('+');
+      }
+      var search = jQuery.param(Shopify.queryParams);
+      if (search.length) {
+        newURL += '?' + search;
+      }
+      location.href = newURL;
+      {% else %}
+      if (newTags.length) {
+        Shopify.queryParams.constraint = newTags.join('+');
+      }
+      else {
+        delete Shopify.queryParams.constraint;
+      }
+      location.search = jQuery.param(Shopify.queryParams);
+      {% endif %}
+    });
+
+    $(document).on('shopify:section:load', function(event) {
+      Shopify.queryParams = {};
+      if (location.search.length) {
+        for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+          aKeyValue = aCouples[i].split('=');
+          if (aKeyValue.length > 1) {
+            Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+          }
+        }
+      }
+      jQuery('.coll-picker').change(function() {
+        if (jQuery(this).val()) {
+          location.href = '/collections/' + jQuery(this).val();
+        }
+        else {
+          location.href = '/collections/all';
+        }
+      });
+      var collFilters = jQuery('.coll-filter');
+      collFilters.change(function() {
+        delete Shopify.queryParams.page;
+        var newTags = [];
+        collFilters.each(function() {
+          if (jQuery(this).val()) {
+            newTags.push(jQuery(this).val());
+          }
+        });
+        {% if collection.handle %}
+        var newURL = '/collections/{{ collection.handle }}';
+        if (newTags.length) {
+          newURL += '/' + newTags.join('+');
+        }
+        var search = jQuery.param(Shopify.queryParams);
+        if (search.length) {
+          newURL += '?' + search;
+        }
+        location.href = newURL;
+        {% else %}
+        if (newTags.length) {
+          Shopify.queryParams.constraint = newTags.join('+');
+        }
+        else {
+          delete Shopify.queryParams.constraint;
+        }
+        location.search = jQuery.param(Shopify.queryParams);
+        {% endif %}
+      });
+    });
+  </script>

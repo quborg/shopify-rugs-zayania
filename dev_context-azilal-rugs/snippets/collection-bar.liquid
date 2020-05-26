@@ -1,0 +1,24 @@
+<div id="filters" data-component="collectionBar">
+    <div class="collection__bar">
+        <div>
+            <button class="collection__button hide" data-button-filter>
+        {{ 'collections.general.filter' | t }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="icon" viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </button> 
+      
+      {% include 'filter-sortby' %} 
+      {% include 'filter-tags-1' %} 
+      {% include 'filter-tags-2' %} 
+      {% include 'filter-size' %}
+
+        </div>
+
+        <div class="collection__bar-view" data-collection-templates>
+            {% assign views = "12,24,36" | split: ',' %} {{ 'collections.general.show' | t }} {% for num in views %}
+            <a href="#" data-collection-template="view-{{ num }}">{{ num }}</a> {% endfor %}
+        </div>
+    </div>
+</div>
