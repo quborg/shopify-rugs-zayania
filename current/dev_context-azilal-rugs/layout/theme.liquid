@@ -105,6 +105,7 @@
     </script>
 
     {% include 'css-variables' %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     {{ 'index.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
@@ -117,7 +118,7 @@
 
   </head>
 
-  <body class='{%- if settings.uppercase_headings -%}g-uppercase{%- endif -%}'>
+  <body class='{{template}} {%- if settings.uppercase_headings -%}g-uppercase{%- endif -%}'>
 
     <main role='main' id='root'>
       {% section 'static-header' %}

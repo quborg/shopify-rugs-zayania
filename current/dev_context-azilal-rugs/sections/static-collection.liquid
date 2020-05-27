@@ -1,3 +1,15 @@
+{% include 'dump' with collections %}
+
+{% paginate collections.all.products by 1000 %}
+  {% for product in collections.all.products %}
+    {% include 'dump' with product %}
+  {% endfor %}
+{% endpaginate %}
+
+{% comment %} {% for product in collections["beni-ourain-rugs"].products %}
+  <p>{{ product.title }}</p>
+{% endfor %} {% endcomment %}
+
 <section
   data-section-id="{{ section.id }}"
   data-section-type="static-collection"
@@ -60,8 +72,8 @@
 
   <div class="collection__container">
     {% include 'collection-bar' %}
-    {% include 'filter-drawer' %}
-    {% include 'sort-drawer' %}
+    {% comment %} {% include 'filter-drawer' %} {% endcomment %}
+    {% comment %} {% include 'sort-drawer' %} {% endcomment %}
     
     <div class="collection__products">
       {% for product in collection.products %}

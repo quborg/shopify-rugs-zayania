@@ -136,7 +136,7 @@
       </a>
     </h1>
 
-    <div class="flex justify-between" data-primary-navigation="yes">
+    <div class="flex justify-between main-menu" data-primary-navigation="yes">
       <nav class="header__nav">
         {%
           include 'navmenu' with
@@ -173,6 +173,11 @@
               </a>
             </li>
           {% endif %}
+          {%- if settings.show_multiple_currencies -%}
+            <li class="header__icon header__icon--currencies">
+              {% include 'currency-picker' %}
+            </li>
+          {%- endif -%}
           <li class="header__icon header__icon--cart">
               <a href="/cart" class="color-inherit js-cart-drawer-toggle">
                 <div class="quick-cart__icon" style="width: 24px;">
@@ -216,7 +221,8 @@
   }
 
   .header__logo-text {
-    font-size: {{ settings.font_logo_size }}px;
+    {% comment %} font-size: {{ settings.font_logo_size }}px; {% endcomment %}
+    font-size: 1.9em;
   }
 
   .header__icon-wrapper {
