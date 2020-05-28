@@ -40,7 +40,7 @@
 
 {% paginate collection.products by paginate_by %}
 
-  <header role="banner" class="section">
+  <header role="banner" class="section products-header">
     <div class="section--standard flex flex-wrap">
       <div
         class="
@@ -48,9 +48,6 @@
           {% if section.settings.show_collection_image and collection.image == blank %}collection__details--no-image{% endif %}
         "
       >
-        <p class="type-heading-meta meta mt0 mb3">
-          {{ 'collections.general.name' | t }}
-        </p>
         <h1 class="type-heading-1 mv3 ma0">{{ collection.title }}</h1>
         {% if collection.description != blank %}
           <div class="type-body-regular rte measure">
@@ -71,9 +68,12 @@
   </header>
 
   <div class="collection__container">
-    {% include 'collection-bar' %}
-    {% comment %} {% include 'filter-drawer' %} {% endcomment %}
-    {% comment %} {% include 'sort-drawer' %} {% endcomment %}
+    {% include 'filters-top-bar' %}
+    
+    {% include 'filter-tags-1' %} 
+    {% include 'filter-size' %}
+
+    {% include 'react-products-filters' %}
     
     <div class="collection__products">
       {% for product in collection.products %}
