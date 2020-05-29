@@ -1,9 +1,17 @@
-import ReactDOM from "react-dom"
-import React from "react"
-import { ProductsFilters } from "./Components/ProductsFilters"
+import React from 'react'
+// import { graphql } from 'react-apollo'
 
-const rootEl = document.getElementById("react-products-filters")
+// import { PRODUCTS_QUERY } from './Queries'
 
-console.log("react !", rootEl.dataset.products)
+const App = props => {
+  console.log(props)
+  return (
+    <div>
+      Hello mada mada daneeeh!!
+    </div>
+  )
+}
 
-rootEl && ReactDOM.render(<ProductsFilters />, rootEl)
+
+export default App
+// export default graphql(PRODUCTS_QUERY, {name: 'products'})(App);
