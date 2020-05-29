@@ -1,12 +1,12 @@
-{% comment %} {% paginate collections.all.products by 1000 %}
-  {% for product in collections.all.products %}
-    {% include 'dump' with product %}
-  {% endfor %}
-{% endpaginate %} {% endcomment %}
-
 {% comment %} {% for product in collections["beni-ourain-rugs"].products %}
   <p>{{ product.title }}</p>
 {% endfor %} {% endcomment %}
+
+{% comment %}
+{% paginate collections.all.products by 1000 %}
+  {% for product in collections.all.products %}
+  {% endfor %}
+{% endpaginate %} {% endcomment %}
 
 <section
   data-section-id="{{ section.id }}"

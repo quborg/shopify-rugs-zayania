@@ -1,17 +1,20 @@
-import React from 'react'
-// import { graphql } from 'react-apollo'
+import React, { Component } from 'react'
 
-// import { PRODUCTS_QUERY } from './Queries'
 
-const App = props => {
-  console.log(props)
-  return (
-    <div>
-      Hello mada mada daneeeh!!
-    </div>
-  )
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { products: props.products }
+  }
+
+  render() {
+    console.log('react App render >>>', this.state)
+    return (
+      <div>
+        Hello mada mada daneeeh!!
+      </div>
+    )
+  }
+
 }
-
-
-export default App
-// export default graphql(PRODUCTS_QUERY, {name: 'products'})(App);
