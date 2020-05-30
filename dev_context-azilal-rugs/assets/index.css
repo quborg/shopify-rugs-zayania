@@ -11344,3 +11344,10 @@ body:not(.index) a.nav__link.active {
     outline: none;
 }
 
+.product__sticky-button {
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.product .selector-wrapper.js {
+    display: none;
+}

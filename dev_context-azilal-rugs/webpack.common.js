@@ -2,7 +2,7 @@ const path = require("path")
 
 module.exports = {
   entry: {
-    'products-filters': "./scripts/index.js"
+    'react-products-filters': "./scripts/index.js"
   },
   module: {
     rules: [
