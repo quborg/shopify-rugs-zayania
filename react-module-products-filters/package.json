@@ -15,7 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:bundle": "webpack --config webpack.config.js",
+    "build:sass": "node-sass ./src/react-products-filters.scss -o ./public/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +33,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11"
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { DEFAULT_IMAGE_SRC, VIEW_BY, PAGE_INDEX } from "./Constants";
 
-import "./react-products-filters.scss";
+// import "./react-products-filters.scss";
 
 export default class App extends Component {
   constructor(props) {
