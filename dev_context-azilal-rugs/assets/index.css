@@ -11351,3 +11351,8 @@ body:not(.index) a.nav__link.active {
 .product .selector-wrapper.js {
     display: none;
 }
+
+#react-products-filters {
+    margin-bottom: 100px;
+}
+

@@ -77,9 +77,9 @@
           {% if settings.show_multiple_currencies or section.settings.show_payment_icons %}
             <div class="footer__currency-payments">
 
-              {%- if settings.show_multiple_currencies -%}
+              {% comment %} {%- if settings.show_multiple_currencies -%}
                 {% include 'currency-picker' %}
-              {%- endif -%}
+              {%- endif -%} {% endcomment %}
 
               {% if section.settings.show_payment_icons %}
                 <div class="footer__payment-icons">

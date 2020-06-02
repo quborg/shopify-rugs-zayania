@@ -253,35 +253,35 @@ Collection.prototype={
 			this.filter_price(min,max);
 		}
 	},
-    filter_data_values:function(name,values){
-      if(values instanceof RegExp){
-  
-        var visible=[];
-  
-        for(var i=0;i<this.product_visible.length;i++){
-          if(this.product_visible[i].element.data(name).match(values))
-            visible.push(this.product_visible[i]);
-        }
-  
-        this.product_visible=visible;
-  
-      }else if(values.length){
-  
-        var visible=[];
-  
-        if(!(values instanceof Array))
-          values=[values];
-  
-        for(var i=0;i<this.product_visible.length;i++){
-          if($.inArray(this.product_visible[i].element.data(name),values)>=0)
-            visible.push(this.product_visible[i]);
-        }
-  
-        this.product_visible=visible;
-  
-      }
-      return this;
-    },
+	filter_data_values:function(name,values){
+		if(values instanceof RegExp){
+
+			var visible=[];
+
+			for(var i=0;i<this.product_visible.length;i++){
+				if(this.product_visible[i].element.data(name).match(values))
+					visible.push(this.product_visible[i]);
+			}
+
+			this.product_visible=visible;
+
+		}else if(values.length){
+
+			var visible=[];
+
+			if(!(values instanceof Array))
+				values=[values];
+
+			for(var i=0;i<this.product_visible.length;i++){
+				if($.inArray(this.product_visible[i].element.data(name),values)>=0)
+					visible.push(this.product_visible[i]);
+			}
+
+			this.product_visible=visible;
+
+		}
+		return this;
+	},
 	filter_types:function(types){
 		if(types.length){
 			if(!(types instanceof Array))

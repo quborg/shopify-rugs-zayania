@@ -19,4 +19,11 @@
       {% endif %}
     {% endfor %}
   ]
+
+  $(".input-reset.input.currency-picker")
+    .val(localStorage.getItem('context-currency')).change()
+    .on('change', function() {
+      localStorage.setItem('context-currency', this.value)
+    })
+
 </script>
