@@ -59,49 +59,54 @@
   </header>
 
   <div class="collection__container">
-    {% include 'collection-bar' %}
-    {% include 'filter-drawer' %}
-    {% include 'sort-drawer' %}
-    
-    <div class="collection__products">
-      {% for product in collection.products %}
-        <div class="w-50 ph1 w-third-m ph2-ns w-25-l mb4">
-          {% include 'product-tile', product: product %}
+    <div class="flex">
+      {% include 'filter-drawer' %}
+
+      <div class="flex flex-column">
+        {% include 'collection-bar' %}
+
+        <div class="collection__products">
+          {% for product in collection.products %}
+            <div class="w-50 ph1 w-third-m ph2-ns w-25-l mb4">
+              {% include 'product-tile', product: product %}
+            </div>
+
+          {% else %}
+            {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+              {% for i in (1..8) %}
+                <a href="#">
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                </a>
+
+                <p>
+                  <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+                </p>
+
+                <p>
+                  {{ 1999 | money }}
+                </p>
+              {% endfor %}
+            {% else %}
+              <p class="db tc w-100 mv6">{{ 'collections.general.no_matches' | t }}</p>
+            {% endif %}
+
+          {% endfor %}
         </div>
 
-      {% else %}
-        {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-          {% for i in (1..8) %}
-            <a href="#">
-              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-            </a>
+        <div class="section mt0 w-100 flex items-center">
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' with type: 'general.pagination.products', total: paginate.items, of: paginate.page_size %}
+          {% else %}
+            {% include 'pagination' with type: 'general.pagination.products', total: collection.products_count, of: collection.products_count %}
+          {% endif %}
+        </div>
 
-            <p>
-              <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
-            </p>
-
-            <p>
-              {{ 1999 | money }}
-            </p>
-          {% endfor %}
-        {% else %}
-          <p class="db tc w-100 mv6">{{ 'collections.general.no_matches' | t }}</p>
-        {% endif %}
-
-      {% endfor %}
+      </div>    
     </div>
+
   </div>
 
-
-  <div class="section mt0">
-    <hr class="mt0 mb3 b--solid b--default bb" style="border-top: none;" />
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' with type: 'general.pagination.products', total: paginate.items, of: paginate.page_size %}
-    {% else %}
-      {% include 'pagination' with type: 'general.pagination.products', total: collection.products_count, of: collection.products_count %}
-    {% endif %}
-  </div>
 
 
 {% endpaginate %}

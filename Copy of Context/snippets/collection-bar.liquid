@@ -1,7 +1,15 @@
 <div id="filters" data-component="collectionBar">
   <div class="collection__bar">
+    <div class="collection__bar-view" data-collection-templates>
+      {% assign views = "12,24,36" | split: ',' %}
+      {{ 'collections.general.show' | t }}
+      {% for num in views %}
+        <a href="#" data-collection-template="view-{{ num }}">{{ num }}</a>
+      {% endfor %}
+    </div>
+
     <div>
-      <button class="collection__button hide" data-button-filter>
+      {% comment %} <button class="collection__button hide" data-button-filter>
         {{ 'collections.general.filter' | t }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +21,7 @@
           <path d="M7 10l5 5 5-5z" />
           <path d="M0 0h24v24H0z" fill="none" />
         </svg>
-      </button>
+      </button> {% endcomment %}
 
       <div class="form-horizontal">
         {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
@@ -52,12 +60,5 @@
       </script>
     </div>
 
-    <div class="collection__bar-view" data-collection-templates>
-      {% assign views = "12,24,36" | split: ',' %}
-      {{ 'collections.general.show' | t }}
-      {% for num in views %}
-        <a href="#" data-collection-template="view-{{ num }}">{{ num }}</a>
-      {% endfor %}
-    </div>
   </div>
 </div>
