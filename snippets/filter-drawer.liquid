@@ -1,0 +1,33 @@
+<div class="drawer filter-flyout" data-component="filterDrawer">
+  <div class="filter-flyout__header">
+    <div id="collection-filters" class="collection-filters">
+      <span class="chevron">filters</span>
+    </div>
+    {% comment %} <h4 class="ma0">{{ 'collections.general.filter' | t }}</h4> {% endcomment %}
+    {% comment %} <a href="#" data-filters-close>
+      {% include 'icon-close' %}
+    </a> {% endcomment %}
+  </div>
+
+  <div class="filters-title-wide-scr">
+    <span>Filters</span>
+  </div>
+  <div id="filter-flyout__filters">
+    <div class="filter-flyout__filters" data-filters>
+    </div>
+
+    <div class="filter-flyout__bottom">
+      <button class="bttn bttn--full" data-apply-filters>
+        {{ 'collections.general.apply' | t }}
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $( "#collection-filters" ).click(function() {
+    $(this).toggleClass("show");
+    $('#filter-flyout__filters').toggleClass( "show" );
+  });
+</script>
