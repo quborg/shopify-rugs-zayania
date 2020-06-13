@@ -1,10 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  mode: "production",
-  // mode: "development",
-  // devtool: "inline-source-map",
-  // watch: true,
+  // mode: "production",
+  mode: "development",
+  devtool: "inline-source-map",
+  watch: true,
   entry: {
     "asset-vendor": "./index.js",
   },
@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "assets"),
+    path: path.resolve(__dirname, "../assets"),
   },
   node: {
     fs: "empty",

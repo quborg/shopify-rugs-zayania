@@ -1,31 +1,17 @@
-// const WebServiceClient = require('@maxmind/geoip2-node').WebServiceClient;
-// // Typescript:
-// // import { WebServiceClient } from '@maxmind/geoip2-node';
- 
-// const client = new WebServiceClient('1234', 'licenseKey');
- 
-// client.country('142.1.1.1').then(response => {
-//   console.log(response.country.isoCode); // 'CA'
-// });
+import { Reader } from "@maxmind/geoip2-node";
 
-// let Reader = require('@maxmind/geoip2-node').Reader;
-// Typescript:
-import { Reader } from '@maxmind/geoip2-node';
+let ip = "1.1.1.1";
 
- 
-Reader.open('./products-swift-bkp.mmdb').then(reader => {
-  console.log(reader.country('1.1.1.1'));
+$.get("https://www.cloudflare.com/cdn-cgi/trace", (data) => {
+  ip = data
+    .split("\n")
+    .filter((value) => value.indexOf("ip=") !== -1)[0]
+    .slice(3);
 });
 
+console.log('ip :', ip);
 
-// const Reader = require('@maxmind/geoip2-node').Reader;
-// // Typescript:
-// // import { Reader } from '@maxmind/geoip2-node';
- 
-// Reader.open('/usr/local/share/GeoIP/GeoIP2-City.mmdb').then(reader => {
-//   const response = reader.city('128.101.101.101');
- 
-//   console.log(response.country.isoCode); // 'US'
-//   console.log(response.city.names.en); // 'Minneapolis'
-//   console.log(response.postal.code); // '55407'
-// });
+Reader.open("https://cdn.shopify.com/s/files/1/0131/4127/8779/t/19/assets/products-swift-bkp.mmdb").then((reader) => {
+  console.log('country :', reader.country(ip));
+});
+console.log('ip :', ip);
