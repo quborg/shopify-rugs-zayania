@@ -10,6 +10,8 @@ requests = "*"
 netaddr = "*"
 maxminddb = "*"
 geoip2 = "*"
+transcrypt = "*"
+jiphy = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,17 +1,13 @@
-import { Reader } from "@maxmind/geoip2-node";
+"use strict";
 
-let ip = "1.1.1.1";
+let pythonBridge = require("python-bridge");
 
-$.get("https://www.cloudflare.com/cdn-cgi/trace", (data) => {
-  ip = data
-    .split("\n")
-    .filter((value) => value.indexOf("ip=") !== -1)[0]
-    .slice(3);
-});
+let python = pythonBridge();
 
-console.log('ip :', ip);
+python.ex`import requests`;
+python.ex`result = requests.get('https://httpbin.org/ip').json()['origin']`;
 
-Reader.open("https://cdn.shopify.com/s/files/1/0131/4127/8779/t/19/assets/products-swift-bkp.mmdb").then((reader) => {
-  console.log('country :', reader.country(ip));
-});
-console.log('ip :', ip);
+const result = python`result`;
+
+console.log("result", result);
+python.end();

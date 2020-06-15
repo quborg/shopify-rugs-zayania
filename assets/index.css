@@ -7517,7 +7517,7 @@ Overrides .visually-hidden when focused */
   text-transform: uppercase;
   font-family: var(--font-body);
   font-weight: var(--font-body-weight);
-  font-size: var(--font-size-body-small);
+  font-size: var(--font-size-body-large);
   letter-spacing: 0.05em;
   text-align: center;
   height: 44px;
@@ -7533,8 +7533,7 @@ Overrides .visually-hidden when focused */
   line-height: 1.5em;
   border-radius: 1px;
   background-color: var(--color-accent);
-  /* color: var(--color-button-text); */
-  color: #808880;
+  color: var(--color-button-text);
   border: none;
   /* button mixin above */
 

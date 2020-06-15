@@ -9,14 +9,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@maxmind/geoip2-node": "^1.4.0"
+    "@maxmind/geoip2-node": "^1.4.0",
+    "child_process": "^1.0.2",
+    "python-bridge": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.5",
+    "py-loader": "^0.3.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
+  },
+  "node": {
+    "child_process": false
+  },
+  "browser": {
+    "child_process": false
   }
 }

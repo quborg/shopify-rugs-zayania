@@ -15,6 +15,13 @@ module.exports = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+      // {
+      //   test: /\.py$/,
+      //   loader: 'py-loader',
+      //   options: {
+      //     compiler: 'jiphy'
+      //   }
+      // }
     ],
   },
   output: {
