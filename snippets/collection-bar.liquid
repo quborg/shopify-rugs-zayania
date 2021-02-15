@@ -1,0 +1,64 @@
+<div id="filters" data-component="collectionBar">
+  <div class="collection__bar">
+    <div class="collection__bar-view" data-collection-templates>
+      {% assign views = "12,24,36" | split: ',' %}
+      {{ 'collections.general.show' | t }}
+      {% for num in views %}
+        <a href="#" data-collection-template="view-{{ num }}">{{ num }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="sort-filter">
+      {% comment %} <button class="collection__button hide" data-button-filter>
+        {{ 'collections.general.filter' | t }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          class="icon"
+          viewBox="0 0 24 24"
+        >
+          <path d="M7 10l5 5 5-5z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </button> {% endcomment %}
+
+      <div class="form-horizontal">
+        {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+        <label for="sortBy" class="small--hide">{{ 'collections.general.sort' | t }}</label>
+        <span class="collection__button-arrow" >
+          <select name="sort_by" aria-describedby="a11y-refresh-page-message" class="collection__button" id="sortBy">
+            {% for option in collection.sort_options %}
+              <option value="{{ option.value }}"{% if sort_by == option.value %} selected="selected"{% endif %}>{{ option.name }}</option>
+            {% endfor %}
+          </select>
+        </span>
+      </div>
+
+      <script>
+        Shopify.queryParams = {};
+        if (location.search.length) {
+          for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+            aKeyValue = aCouples[i].split('=');
+            if (aKeyValue.length > 1) {
+              Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+            }
+          }
+        }
+
+        $(function() {
+          $('#sortBy')
+            // select the current sort order
+            .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
+            .bind('change', function() {
+              Shopify.queryParams.sort_by = jQuery(this).val();
+              location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+            }
+          );
+        });
+        
+      </script>
+    </div>
+
+  </div>
+</div>
